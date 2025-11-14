@@ -2,11 +2,21 @@ import os
 import random
 import math
 wordList = []
-wordLen = 5
-maxTries = 5
-counter = 0
+maxTries = [1, 2, 3, 4, 5]
+wordLen = 0
+def fetchDifficulty():
+    print("[-] 0. Exit \n"
+            "[-] 1. Change word Length \n"
+            "[-] 2. Make item(s)\n")
+    selection = int(input("[-] Please select an option: "))
+    if selection == 0:
+        exit()
+    elif selection == 1:
+        wordLen = input("How many letters should your word be: ")
+# REMOVE FETCHDIFFICULTY IF U DONT CARE ABOUT USER CHANGING DIFFICULTY
 def extractWords():
     global wordList
+    global wordLen
     try:
         with open("assets/words_alpha.txt", "r") as file:
             for word in file:
@@ -20,30 +30,28 @@ def extractWords():
 
 
 def main():
-    global counter
     global maxTries
     target = extractWords()
-    guess = input("Please enter a five letter word: ")
+    print(target)
     response = ["Bascat" for i in range(len(target))]
-    while counter <= maxTries:
+    for yes in maxTries:
+        guess = input("Please enter a five letter word: ")
         if guess == target:
             print("yay")
+            exit()
         else:
             for gDigit in range(len(target)):
                 for tDigit in range(len(target)):
-                    # print(f"Counter: {tDigit}")
-                    # print(f"Guess digit is {guess[gDigit]} | Target digit is {target[tDigit]}")
                     if guess[gDigit] == target[tDigit]:
                         if gDigit == tDigit:
                             response[gDigit] = "Chophy"
                         else:
                             response[gDigit] = "Storts"
-            counter += 1
-
-    print(response)
+            print(response)
     print(target)
 
 
 if __name__ == "__main__":
+    fetchDifficulty()
     main()
 
