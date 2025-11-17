@@ -4,16 +4,29 @@ import math
 wordList = []
 maxTries = [1, 2, 3, 4, 5]
 wordLen = 0
+
+
 def fetchDifficulty():
-    print("[-] 0. Exit \n"
-            "[-] 1. Change word Length \n"
-            "[-] 2. Make item(s)\n")
-    selection = int(input("[-] Please select an option: "))
-    if selection == 0:
-        exit()
-    elif selection == 1:
-        wordLen = input("How many letters should your word be: ")
-# REMOVE FETCHDIFFICULTY IF U DONT CARE ABOUT USER CHANGING DIFFICULTY
+    while True:
+        global wordLen
+        print("[-] 0. Exit \n"
+                "[-] 1. Change word Length \n"
+                "[-] 2. Start a round\n")
+        selection = int(input("[-] Please select an option: "))
+        if selection == 0:
+            exit()
+        elif selection == 1:
+                wordNumber = input("How many letters should your word be: ")
+                try:
+                    int(wordNumber)
+                    wordLen = wordNumber
+                except:
+                    print("choose an →→→→→→→→NUMBER←←←←←←←←")
+        elif selection == 2 and wordLen != 0:
+            main()
+        elif selection == 2 and wordLen == 0:
+            print("[!] Choose a number before starting")
+
 def extractWords():
     global wordList
     global wordLen
@@ -25,6 +38,8 @@ def extractWords():
     except FileNotFoundError:
         print("[!] Error! File not found.")
     wordRandomizer = random.randint(0, len(wordList))
+    #word Randomzier is zero fix tmrw
+    print(wordRandomizer)
     target = wordList[wordRandomizer]
     return(target)
 
@@ -53,5 +68,5 @@ def main():
 
 if __name__ == "__main__":
     fetchDifficulty()
-    main()
+
 
