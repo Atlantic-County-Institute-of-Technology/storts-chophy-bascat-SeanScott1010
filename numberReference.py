@@ -10,7 +10,7 @@ def fetchDifficulty():
     while True:
         global wordLen
         print("[-] 0. Exit \n"
-                "[-] 1. Change word Length \n"
+                "[-] 1. Change word Length\n"
                 "[-] 2. Start a round\n")
         selection = int(input("[-] Please select an option: "))
         if selection == 0:
@@ -19,13 +19,17 @@ def fetchDifficulty():
                 wordNumber = input("How many letters should your word be: ")
                 try:
                     int(wordNumber)
-                    wordLen = wordNumber
+                    wordLen = int(wordNumber)
                 except:
                     print("choose an →→→→→→→→NUMBER←←←←←←←←")
         elif selection == 2 and wordLen != 0:
             main()
+            return wordLen
         elif selection == 2 and wordLen == 0:
             print("[!] Choose a number before starting")
+        else:
+            print("hey dummy that's not an option")
+
 
 def extractWords():
     global wordList
@@ -38,19 +42,16 @@ def extractWords():
     except FileNotFoundError:
         print("[!] Error! File not found.")
     wordRandomizer = random.randint(0, len(wordList))
-    #word Randomzier is zero fix tmrw
-    print(wordRandomizer)
     target = wordList[wordRandomizer]
-    return(target)
+    return target
 
 
 def main():
     global maxTries
     target = extractWords()
-    print(target)
-    response = ["Bascat" for i in range(len(target))]
+    response = ["Red" for i in range(len(target))]
     for yes in maxTries:
-        guess = input("Please enter a five letter word: ")
+        guess = input(f"Please enter a {wordLen} letter word: ")
         if guess == target:
             print("yay")
             exit()
@@ -59,9 +60,9 @@ def main():
                 for tDigit in range(len(target)):
                     if guess[gDigit] == target[tDigit]:
                         if gDigit == tDigit:
-                            response[gDigit] = "Chophy"
+                            response[gDigit] = "Green"
                         else:
-                            response[gDigit] = "Storts"
+                            response[gDigit] = "Yellow"
             print(response)
     print(target)
 
